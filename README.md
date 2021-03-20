@@ -37,3 +37,6 @@ Open Terminal, navigate to the Gluer folder and run the following command:
 ```bash
 ./gluer -output /tmp/output.mp4 /tmp/src
 ```
+
+The result of the manipulation above is available on YouTube:
+[![Video Screenshot](https://img.youtube.com/vi/wGfS8M6qrnw/0.jpg)](https://www.youtube.com/watch?v=wGfS8M6qrnw)
