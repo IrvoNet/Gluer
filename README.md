@@ -33,5 +33,7 @@ Get 1 audio from [YouTube Audio Library](https://youtube.com/audiolibrary):
 Put all of them to the same folder (e.g. `/tmp/src`):
 ![Pexels Screenshot](screenshots/finder-src-folder.png)
 
-Run `./gluer -output /tmp/output.mp4 /tmp/src`
-
+Open Terminal, navigate to the Gluer folder and run the following command:
+```bash
+./gluer -output /tmp/output.mp4 /tmp/src
+```
