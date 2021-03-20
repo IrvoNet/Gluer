@@ -24,7 +24,7 @@ optional arguments:
 ```
 
 ## Example
-Get 5 videos from [Pexels](https://www.pexels.com/search/videos/cloud/):
+Get 5 to 10 videos from [Pexels](https://www.pexels.com/search/videos/cloud/):
 ![Pexels Screenshot](screenshots/pexels-screenshot.png)
 
 Get 1 audio from [YouTube Audio Library](https://youtube.com/audiolibrary):
