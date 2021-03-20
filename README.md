@@ -25,15 +25,19 @@ optional arguments:
 
 ## Example
 Get 5 to 10 videos from [Pexels](https://www.pexels.com/search/videos/cloud/):
+
 ![Pexels Screenshot](screenshots/pexels-screenshot.png)
 
 Get 1 audio from [YouTube Audio Library](https://youtube.com/audiolibrary):
+
 ![Pexels Screenshot](screenshots/youtube-audio-library.png)
 
 Put all of them to the same folder (e.g. `/tmp/src`):
+
 ![Pexels Screenshot](screenshots/finder-src-folder.png)
 
 Open Terminal, navigate to the Gluer folder and run the following command:
+
 ```bash
 ./gluer -output /tmp/output.mp4 /tmp/src
 ```
