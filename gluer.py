@@ -90,7 +90,9 @@ def _add_music():
     audio = audios.pop()
     os.system('''%s -hide_banner -v error \
                 -i %s -i "%s" -map 0:v -map 1:a -c:v copy \
-                -shortest %s''' % (ffmpeg, tmpout, audio, tmptmp))
+                -shortest \
+                -metadata title="Gluer by IrvoNet" \
+                %s''' % (ffmpeg, tmpout, audio, tmptmp))
     os.path.isfile(tmptmp) and os.rename(tmptmp, tmpout)
 
 
@@ -104,14 +106,14 @@ def _run():
     if cut_length > 15:
         cut_length /= 2
         iterations *= 2
-    print('Chunk duration: %s seconds' % cut_length)
+    print('Chunk duration: %s seconds' % int(cut_length))
 
     print('Processed 0%', end='\r')
     for counter in range(iterations):
         video = _get_next_video()
         duration = _get_video_duration(video)
         max_range = int(duration - cut_length)
-        start_seconds = duration > cut_length and randrange(max_range) or 0
+        start_seconds = max_range and randrange(max_range) or 0
 
         _cut_video(video, start_seconds, cut_length)
         _add_fade_effects()
@@ -140,14 +142,14 @@ def _find_media(src):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        '-i', metavar='path', dest='src',
+        'input',
         help='The path to the folder with video and audio files.')
     parser.add_argument(
-        '-o', metavar='path', dest='output', default='output.mp4', 
+        '-output', metavar='path', default='output.mp4', 
         help='The path to the output file (default: output.mp4).')
     args = parser.parse_args()
 
-    _find_media(args.src)
+    _find_media(args.input)
     if videos and audios:
         os.path.isdir('tmp') or os.makedirs('tmp')
         os.path.isfile(args.output) and os.unlink(args.output)
