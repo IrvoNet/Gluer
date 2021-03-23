@@ -68,12 +68,12 @@ def _add_fade_effects():
             -vf "fade=type=in:duration=1,fade=type=out:duration=1:start_time=%s" \
             -c:a copy %s''' % (ffmpeg, tmpcut, duration, tmptmp)
     os.system(cmd)
-    os.rename(tmptmp, tmpcut)
+    _rename(tmptmp, tmpcut)
 
 
 def _concat_videos():
     if not os.path.isfile(tmpout):
-        os.rename(tmpcut, tmpout)
+        _rename(tmpcut, tmpout)
     else:
         cmd = '''%s -hide_banner -v error -y \
                 -fflags +discardcorrupt \
@@ -95,7 +95,7 @@ def _add_music():
                 -shortest \
                 -metadata title="Gluer by IrvoNet" \
                 %s''' % (ffmpeg, tmpout, audio, tmptmp))
-    os.path.isfile(tmptmp) and os.rename(tmptmp, tmpout)
+    _rename(tmptmp, tmpout)
 
 
 def _run():
@@ -140,6 +140,19 @@ def _find_media(src):
     else:
         print('No such directory: "%s"' % src)
 
+def _rename(src: str, dst: str):
+    """Renames the file `src` to `dst`.
+
+    Args:
+        src: A source file path.
+        dst: A new file path.
+
+    See: https://docs.python.org/3/library/os.html#os.rename
+    """
+    if os.path.isfile(src):
+        os.path.isfile(dst) and os.unlink(dst)
+        os.rename(src, dst)
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -156,7 +169,7 @@ def main():
         os.path.isdir('tmp') or os.makedirs('tmp')
         os.path.isfile(args.output) and os.unlink(args.output)
         _run()
-        os.path.isfile(tmpout) and os.rename(tmpout, args.output)
+        _rename(tmpout, args.output)
         shutil.rmtree('tmp')
     else:
         print('No video or audio files to process.')
