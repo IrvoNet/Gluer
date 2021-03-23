@@ -9,6 +9,7 @@ To build and run this application, you will need the following tools:
 - [ffpmeg](https://ffmpeg.org/download.html) - A complete, cross-platform solution to record, convert and stream audio and video.
   - Ubuntu: `sudo apt install ffmpeg`
   - macOS: `brew install ffmpeg`
+  - Windows: [download exe files](https://ffmpeg.org/download.html#build-windows)
 
 
 ## Usage
