@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import argparse
 import os
+import platform
 import shutil
 import subprocess
 import sys
@@ -9,8 +10,9 @@ import uuid
 from random import randrange
 from time import gmtime, strftime
 
-ffmpeg = 'ffmpeg' # TODO(vpodk): Update for Windows
-ffprobe = 'ffprobe' # TODO(vpodk): Update for Windows
+is_windows = 'Windows' == platform.system()
+ffmpeg = 'ffmpeg.exe' if is_windows else 'ffmpeg'
+ffprobe = 'ffprobe.exe' if is_windows else 'ffprobe'
 
 videos = []
 audios = []
