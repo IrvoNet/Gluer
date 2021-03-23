@@ -75,11 +75,12 @@ def _concat_videos():
     if not os.path.isfile(tmpout):
         _rename(tmpcut, tmpout)
     else:
+        codec = 'h264' if is_windows else 'h264_mp4toannexb'
         cmd = '''%s -hide_banner -v error -y \
                 -fflags +discardcorrupt \
-                -i %s -c copy -bsf:v h264_mp4toannexb -f mpegts %s'''
-        os.system(cmd % (ffmpeg, tmpcut, '%s.ts' % tmpcut))
-        os.system(cmd % (ffmpeg, tmpout, '%s.ts' % tmpout))
+                -i %s -c copy -bsf:v %s -f mpegts %s'''
+        os.system(cmd % (ffmpeg, tmpcut, codec, '%s.ts' % tmpcut))
+        os.system(cmd % (ffmpeg, tmpout, codec, '%s.ts' % tmpout))
 
         os.system('''%s -hide_banner -v error -y \
                     -i "concat:%s.ts|%s.ts" \
