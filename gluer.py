@@ -75,17 +75,23 @@ def _concat_videos():
     if not os.path.isfile(tmpout):
         _rename(tmpcut, tmpout)
     else:
-        cmd = '''%s -hide_banner -v error -y \
-                -fflags +discardcorrupt \
-                -i %s -c copy -bsf:v h264_mp4toannexb -f mpegts %s'''
-        os.system(cmd % (ffmpeg, tmpcut, '%s.ts' % tmpcut))
-        os.system(cmd % (ffmpeg, tmpout, '%s.ts' % tmpout))
+        try:
+            cmd = '''%s -hide_banner -v error -y \
+                    -fflags +discardcorrupt \
+                    -i %s -c copy -bsf:v h264_mp4toannexb -f mpegts %s'''
+            os.system(cmd % (ffmpeg, tmpcut, '%s.ts' % tmpcut))
+            os.system(cmd % (ffmpeg, tmpout, '%s.ts' % tmpout))
 
-        os.system('''%s -hide_banner -v error -y \
-                    -i "concat:%s.ts|%s.ts" \
-                    -c copy %s''' % (ffmpeg, tmpout, tmpcut, tmpout))
-        os.unlink('%s.ts' % tmpcut)
-        os.unlink('%s.ts' % tmpout)
+            os.system('''%s -hide_banner -v error -y \
+                        -i "concat:%s.ts|%s.ts" \
+                        -c copy %s''' % (ffmpeg, tmpout, tmpcut, tmpout))
+            os.unlink('%s.ts' % tmpcut)
+            os.unlink('%s.ts' % tmpout)
+        except:
+            # Windows
+            os.system('''%s -hide_banner -v error -y \
+                        -i "concat:%s|%s" \
+                        -c copy %s''' % (ffmpeg, tmpout, tmpcut, tmpout))
 
 
 def _add_music():
