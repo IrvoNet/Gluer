@@ -115,7 +115,7 @@ def _run():
         video = _get_next_video()
         duration = _get_video_duration(video)
         max_range = int(duration - cut_length)
-        start_seconds = max_range and randrange(max_range) or 0
+        start_seconds = max_range > 0 and randrange(max_range) or 0
 
         _cut_video(video, start_seconds, cut_length)
         _add_fade_effects()
