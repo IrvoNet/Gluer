@@ -9,7 +9,7 @@ To build and run this application, you will need the following tools:
 - [ffpmeg](https://ffmpeg.org/download.html) - A complete, cross-platform solution to record, convert and stream audio and video.
   - Ubuntu: `sudo apt install ffmpeg`
   - macOS: `brew install ffmpeg`
-  - Windows: [download exe files](https://ffmpeg.org/download.html#build-windows)
+  - Windows: [download exe files](https://ffmpeg.org/download.html#build-windows) and add it to the [`PATH` environment variable](https://docs.microsoft.com/en-us/previous-versions/office/developer/sharepoint-2010/ee537574(v=office.14))
 
 
 ## Usage
